@@ -20,5 +20,10 @@ It is *not* meant to be OPSEC safe or safe to use in real life. It was meant to 
 
 Be sure to manually modify the ip address and port in the agent manually, I didn't write the GUI auto generator script yet ;-;
 
+## Why did you name it this? This is a dumb name!
+I literally could not think of a name and it was like 2 minutes to Havoc drop. Decided to name it after a funny emote.
+![image](https://user-images.githubusercontent.com/29991665/193332178-506de9b7-160f-46da-9be7-e76446c8b729.png)
+
+
 Have fun
 ~ CodeX
