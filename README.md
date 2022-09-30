@@ -4,7 +4,7 @@
 </p>
 
 ## What is this?
-This is a third party agent for Havoc C2 written in python. It is intended to be a basic PoC used to learn how to write custom Havoc agents, with its accompanying ![https://codex-7.gitbook.io/codexs-terminal-window/red-team/red-team-dev/extending-havoc-c2/third-party-agents](blog post).
+This is a third party agent for Havoc C2 written in python. It is intended to be a basic PoC used to learn how to write custom Havoc agents, with its accompanying [https://codex-7.gitbook.io/codexs-terminal-window/red-team/red-team-dev/extending-havoc-c2/third-party-agents](blog post).
 
 ## Features
 It currently only supports 2 commands:
