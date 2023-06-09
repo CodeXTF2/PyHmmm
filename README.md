@@ -15,7 +15,7 @@ It is *not* meant to be OPSEC safe or safe to use in real life. It was meant to 
 ## Install
 
 ```
-
+sudo pip install -r requirements
 ```
 
 ## Usage
