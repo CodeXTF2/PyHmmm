@@ -1,12 +1,13 @@
 import base64
 from cgi import print_form
-import sys
+
 from havoc.agent import AgentType
 from havoc.externalc2 import ExternalC2
 from threading import Thread
-import inspect
+
 import websocket
 import json
+import ssl
 
 
 def build_request(head_type, body: dict) -> dict:
@@ -46,7 +47,7 @@ class HavocService:
             on_open=self.__ws_on_open
         )
 
-        Thread( target=self.Socket.run_forever ).start()
+        Thread( target=self.Socket.run_forever, kwargs={'sslopt': {'check_hostname': False, "cert_reqs": ssl.CERT_NONE}} ).start()
 
         while True:
             if self.Connected:
@@ -55,9 +56,6 @@ class HavocService:
         return
 
     def __ws_on_error(self, wsapp, error):
-        print(inspect.stack()[1].function)
-        print(inspect.stack()[2].function)
-        print(inspect.stack()[3].function)
         print("[-] Websocket error:", error)
 
     def __ws_on_open(self, socket):
@@ -75,7 +73,7 @@ class HavocService:
 
     def __ws_on_message( self, ws, data ):
         print( "[*] New Message" )
-
+    
         data = json.loads( data )
 
         t = Thread(target=self.service_dispatch, args=(data,))
@@ -150,7 +148,7 @@ class HavocService:
                         if data[ "Body" ][ "Task" ] == "Get":
                             RandID = data[ "Body" ][ "RandID" ]
                             Tasks  = base64.b64decode( data[ "Body" ][ "TasksQueue" ] )
-
+                        
                             print( f"Set TasksQueue to {RandID} = {Tasks.hex()}" )
 
                             self.RegisteredAgent._current_data[ RandID ] = Tasks
@@ -161,11 +159,11 @@ class HavocService:
                         self.Socket.send( json.dumps( data ) )
 
                     case "AgentResponse":
-
+                    
                         agent_response = self.RegisteredAgent.response( data[ "Body" ] )
                         data[ "Body" ][ "Response" ] = base64.b64encode( agent_response ).decode( 'utf-8' )
-
-                        print(self.Socket.send( json.dumps( data ) ))
+                        
+                        self.Socket.send( json.dumps( data ) )
 
                     case "AgentBuild":
 
