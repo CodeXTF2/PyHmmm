@@ -17,7 +17,7 @@ COMMAND_OUTPUT           = 0x200
 class CommandShell(Command):
     CommandId = COMMAND_SHELL
     Name = "shell"
-    Description = "executes commands using cmd.exe"
+    Description = "executes commands"
     Help = ""
     NeedAdmin = False
     Params = [
@@ -57,8 +57,8 @@ class CommandExit( Command ):
 # =======================
 class python(AgentType):
     Name = "PyHmmm"
-    Author = "@codex_tf2"
-    Version = "0.1"
+    Author = "@codex_tf2 @ Al130"
+    Version = "0.2"
     Description = f"""python 3rd party agent for Havoc"""
     MagicValue = 0x41414141
 
@@ -133,13 +133,13 @@ def main():
     Havoc_python = python()
     print(os.getpid())
     print( "[*] Connect to Havoc service api" )
-    Havoc_Service = HavocService(
-        endpoint="ws://localhost:40056/service-endpoint",
+    havoc_service = HavocService(
+        endpoint="wss://127.0.0.1:40056/service-endpoint",
         password="service-password"
     )
 
     print( "[*] Register python to Havoc" )
-    Havoc_Service.register_agent(Havoc_python)
+    havoc_service.register_agent(Havoc_python)
 
     return
 

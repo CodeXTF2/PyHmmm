@@ -21,3 +21,4 @@ class ExternalC2:
             print( f"[-] Exception: {e}" )
 
         return agent_response
+
